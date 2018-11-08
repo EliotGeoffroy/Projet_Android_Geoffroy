@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,10 +38,12 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Object o) {
                         // Display the first 500 characters of the response string.
-                        String response = (String)o;
+                        final String response = (String)o;
                         Log.i(TAG, response.toString());
                         // mTxtDisplay.setText("Response is: " + response.substring(0, 500));
+
                         Intent intent = new Intent(MainActivity.this, ListActivity.class);
+                        intent.putExtra("response", response);
                         startActivity(intent);
                     }
                 }, new Response.ErrorListener() {
