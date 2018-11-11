@@ -1,0 +1,19 @@
+package com.projet.geoffroy.projet_android_geoffroy;
+
+import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.webkit.WebView;
+
+public class WebviewActivity extends Activity {
+    private WebView webView;
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.content_webview);
+        Bundle bundle = getIntent().getExtras();
+        String myURL=bundle.getString("URL");
+        webView = (WebView) findViewById(R.id.webView1);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.loadUrl(myURL);
+    }
+}

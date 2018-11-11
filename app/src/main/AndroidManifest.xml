@@ -19,6 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".POIActivity" />
+        <activity android:name=".RequestPOI" />
+        <activity android:name=".WebviewActivity" />
+        <activity android:name=".DetailPOI"></activity>
     </application>
 
 </manifest>
