@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageView mImageView;
         final TextView mTxtDisplay = (TextView) findViewById(R.id.txtDisplay);
         String url = "http://voyage2.corellis.eu/api/v2/homev2?lat=43&lon=6";
 
@@ -34,16 +32,18 @@ public class MainActivity extends AppCompatActivity {
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener() {
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(Object o) {
+                    public void onResponse(String response) {
                         // Display the first 500 characters of the response string.
-                        final String response = (String)o;
                         Log.i(TAG, response.toString());
                         // mTxtDisplay.setText("Response is: " + response.substring(0, 500));
 
-                        Intent intent = new Intent(MainActivity.this, ListActivity.class);
-                        intent.putExtra("response", response);
+                        Bundle bundle =new Bundle();
+                        bundle.putString("response",response.toString());
+
+                        Intent intent = new Intent(MainActivity.this, POIActivity.class);
+                        intent.putExtras(bundle);
                         startActivity(intent);
                     }
                 }, new Response.ErrorListener() {
