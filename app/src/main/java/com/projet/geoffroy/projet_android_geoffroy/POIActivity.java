@@ -51,9 +51,16 @@ public class POIActivity extends ListActivity {
     private void RemplirLaBibliotheque(JSONArray myPlaces){
         maBibliotheque.clear();
         try{
+            Log.i(TAG,myPlaces.getJSONObject(0).getString("type") + maBibliotheque.toString());
             for (int i=0; i<myPlaces.length(); i++){
-                String myImageUrl= "";
-                if(myPlaces.getJSONObject(i).getString("type")=="POI"){
+                String myImageUrl = "";
+                Double myDistance = 0.0;
+
+                if(myPlaces.getJSONObject(i).getString("type").contains("POI")){
+                    Log.i(TAG,"POI" + maBibliotheque.toString());
+                    if (myPlaces.getJSONObject(i).has("distance")){
+                        myDistance= myPlaces.getJSONObject(i).getDouble("distance");
+                    }
                     if (myPlaces.getJSONObject(i).getString("media").length()!=0 && myPlaces.getJSONObject(i).getString("media")!= null) {
                         myImageUrl= myPlaces.getJSONObject(i).getString("media");
                     }
@@ -61,19 +68,26 @@ public class POIActivity extends ListActivity {
                         myImageUrl = "https://uaecm.fr/images/logos_assos/technopole_logo.png";
                     }
                     maBibliotheque.add(new POI(myPlaces.getJSONObject(i).getString("type"),myPlaces.getJSONObject(i).getString("display"),
-                            myPlaces.getJSONObject(i).getString("distance"), myImageUrl));
+                            myDistance, myImageUrl));
                 }
-                else if(myPlaces.getJSONObject(i).getString("type")=="RESTAURANT"){
-                    if (myPlaces.getJSONObject(i).getString("media").length()!=0 && myPlaces.getJSONObject(i).getString("media")!= null) {
+                else if(myPlaces.getJSONObject(i).getString("type").contains("RESTAURANT")){
+                    Log.i(TAG,"Restaurant" + maBibliotheque.toString());
+                    if (myPlaces.getJSONObject(i).has("distance")){
+                        myDistance= myPlaces.getJSONObject(i).getDouble("distance");
+                    }                    if (myPlaces.getJSONObject(i).getString("media").length()!=0 && myPlaces.getJSONObject(i).getString("media")!= null) {
                         myImageUrl= myPlaces.getJSONObject(i).getString("media");
                     }
                     else {
                         myImageUrl = "https://uaecm.fr/images/logos_assos/technopole_logo.png";
                     }
                     maBibliotheque.add(new POI(myPlaces.getJSONObject(i).getString("type"),myPlaces.getJSONObject(i).getString("display"),
-                            myPlaces.getJSONObject(i).getString("distance"), myImageUrl));
+                            myDistance, myImageUrl));
                 }
-                else if(myPlaces.getJSONObject(i).getString("type")=="HOTEL"){
+                else if(myPlaces.getJSONObject(i).getString("type").contains("HOTEL")){
+                    Log.i(TAG,"Hotel" + maBibliotheque.toString());
+                    if (myPlaces.getJSONObject(i).has("distance")){
+                        myDistance= myPlaces.getJSONObject(i).getDouble("distance");
+                    }
                     if (myPlaces.getJSONObject(i).getString("media").length()!=0 && myPlaces.getJSONObject(i).getString("media")!= null) {
                         myImageUrl= myPlaces.getJSONObject(i).getString("media");
                     }
@@ -81,17 +95,19 @@ public class POIActivity extends ListActivity {
                         myImageUrl = "https://uaecm.fr/images/logos_assos/technopole_logo.png";
                     }
                     maBibliotheque.add(new POI(myPlaces.getJSONObject(i).getString("type"),myPlaces.getJSONObject(i).getString("display"),
-                            myPlaces.getJSONObject(i).getString("distance"), myImageUrl));
+                            myDistance, myImageUrl));
                 }
-                else if(myPlaces.getJSONObject(i).getString("type")=="CITY"){
-                    if (myPlaces.getJSONObject(i).getString("media").length()!=0 && myPlaces.getJSONObject(i).getString("media")!= null) {
+                else if(myPlaces.getJSONObject(i).getString("type").contains("CITY")){
+                    if (myPlaces.getJSONObject(i).has("distance")){
+                        myDistance= myPlaces.getJSONObject(i).getDouble("distance");
+                    }                    if (myPlaces.getJSONObject(i).getString("media").length()!=0 && myPlaces.getJSONObject(i).getString("media")!= null) {
                         myImageUrl= myPlaces.getJSONObject(i).getString("media");
                     }
                     else {
                         myImageUrl = "https://uaecm.fr/images/logos_assos/technopole_logo.png";
                     }
                     maBibliotheque.add(new POI(myPlaces.getJSONObject(i).getString("type"),myPlaces.getJSONObject(i).getString("display"),
-                            myPlaces.getJSONObject(i).getString("distance"), myImageUrl));
+                            myDistance, myImageUrl));
                 }
             }
         }catch(JSONException e){

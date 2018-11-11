@@ -55,7 +55,7 @@ public class POIAdapter extends BaseAdapter {
         POI poi = biblio.get(position);
         holder.tvType.setText(poi.getType());
         holder.tvDisplay.setText(poi.getDisplay());
-        holder.tvDistance.setText(poi.getDistance());
+        holder.tvDistance.setText(poi.getDistance().toString());
         Picasso.get().load(poi.getImage()).into(holder.ivImage);
         return convertView;
     }

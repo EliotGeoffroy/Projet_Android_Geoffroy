@@ -3,7 +3,7 @@ package com.projet.geoffroy.projet_android_geoffroy;
 public class POI {
     private String type;
     private String display;
-    private String distance;
+    private Double distance;
     private String image;
 
     public String getType() {
@@ -22,11 +22,11 @@ public class POI {
         this.display = display;
     }
 
-    public String getDistance() {
+    public Double getDistance() {
         return distance;
     }
 
-    public void setDistance(String distance) {
+    public void setDistance(Double distance) {
         this.distance = distance;
     }
 
@@ -38,7 +38,7 @@ public class POI {
         this.image = image;
     }
 
-    public POI(String type, String display, String distance, String image) {
+    public POI(String type, String display, Double distance, String image) {
         this.type = type;
         this.display = display;
         this.distance = distance;
